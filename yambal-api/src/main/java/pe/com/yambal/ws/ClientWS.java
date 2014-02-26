@@ -1,11 +1,15 @@
 package pe.com.yambal.ws;
 
 import java.util.Collections;
+
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 import com.sun.jersey.api.core.InjectParam;
 import pe.com.yambal.model.ClientDTO;
 import pe.com.yambal.service.ClientService;
@@ -42,6 +46,23 @@ public class ClientWS {
 			}
 		} catch (Exception e) {
 			return new RestResponse(false, Constant.SERVICE_ERROR);
+		}
+	}
+	
+	
+	@GET 
+	@Path("/sendInfo/{email}")
+	@Produces({ MediaType.APPLICATION_JSON }) 
+	public RestResponse forgetPassword(@PathParam("email") String email_p){
+		try{
+			ClientDTO clientReturn = clientService.sendProducts(email_p);
+			if( clientReturn != null){
+				return new RestResponse(clientReturn.getMessage().isSuccess(), clientReturn.getMessage().getDescription());
+			}else{
+				return new RestResponse(false,Constant.SERVICE_ERROR );
+			}	
+		}catch(Exception e){
+			return new RestResponse(false,Constant.SERVICE_ERROR );
 		}
 	}
 

@@ -2,6 +2,7 @@
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/pojo/Adviser.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/util/Message.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/ws/response/RestResponse.java
+/Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/util/HtmlEmailSender.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/ws/AdviserWS.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/pojo/Client.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/util/Constant.java
@@ -21,8 +22,8 @@
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/ws/ClientWS.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/service/ClientService.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/model/ClientDTO.java
-/Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/ws/request/RegisterRequest.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/dao/impl/ClientDaoImpl.java
+/Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/ws/request/RegisterRequest.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/model/Tone_SkinDTO.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/base/GenericService.java
 /Users/Cesar/Documents/Proyectos/Yambal/backend/yambal-api/src/main/java/pe/com/yambal/dao/AdviserDao.java

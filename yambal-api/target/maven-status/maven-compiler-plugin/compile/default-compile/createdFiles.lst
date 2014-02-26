@@ -9,6 +9,7 @@ pe/com/yambal/model/TypeLookDTO.class
 pe/com/yambal/model/SubToneSkinDTO.class
 pe/com/yambal/dao/impl/RegisterDaoImpl.class
 pe/com/yambal/base/GenericDao.class
+pe/com/yambal/util/HtmlEmailSender$1.class
 pe/com/yambal/model/TypeSkinDTO.class
 pe/com/yambal/model/ProductDTO.class
 pe/com/yambal/base/GenericService.class
@@ -16,6 +17,7 @@ pe/com/yambal/ws/request/ClientRequest.class
 pe/com/yambal/model/ClientDTO.class
 pe/com/yambal/pojo/Adviser.class
 pe/com/yambal/ws/request/RegisterRequest.class
+pe/com/yambal/util/HtmlEmailSender.class
 pe/com/yambal/util/Message.class
 pe/com/yambal/model/SeleccionDTO.class
 pe/com/yambal/dao/impl/AdviserDaoImpl.class

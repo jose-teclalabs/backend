@@ -1,12 +1,10 @@
 package pe.com.yambal.service.impl;
 
 import java.util.Date;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import pe.com.yambal.dao.ClientDao;
 import pe.com.yambal.dao.CombinationDao;
 import pe.com.yambal.dao.RegisterDao;

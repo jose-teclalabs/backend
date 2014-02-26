@@ -30,6 +30,9 @@ public class Constant {
 	public static final String INCORRECT_CODE = "incorrect code";
 	public static final String CLIENT_ALREADY_EXIST = "the client already exist";
 	
+	public static final String EMAIL_NOT_FOUND = "Email not found";
+	public static final String ERROR_SENDING_EMAIL = "Error sending email, please try again";
+	
 	// goal state
 	public static final Integer GOAL_IN_PROGRESS = 0;
 	public static final Integer GOAL_COMPLETE = 1;

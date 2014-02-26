@@ -2,6 +2,7 @@ package pe.com.yambal.service.impl;
 
 import java.util.Date;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import pe.com.yambal.pojo.Adviser;
 import pe.com.yambal.pojo.Client;
 import pe.com.yambal.service.ClientService;
 import pe.com.yambal.util.Constant;
+import pe.com.yambal.util.HtmlEmailSender;
 import pe.com.yambal.util.Message;
 import pe.com.yambal.ws.request.ClientRequest;
 
@@ -66,6 +68,7 @@ public class ClientServiceImpl implements ClientService{
 			clientObj.setEmail(request.getEmail());
 			clientObj.setName(request.getName());
 			clientObj.setClientDate(new Date());
+			clientObj.setDni(dni);
 			clientObj.setStatus(1);
 			clientObj.setAge(age);
 			clientObj.setAdviser(new AdviserDTO(adviserReturn.getAdviserId()));
@@ -86,6 +89,62 @@ public class ClientServiceImpl implements ClientService{
 			log.error("Error at save profile goal" );
 			return new ClientDTO(new Message(false,Constant.DATABASE_ERROR));
 		}
-	} 
+	}
+	
+	@Override
+	public ClientDTO sendProducts(String email) {
+		try{
+			System.out.println("el correo que viene es : "+email);
+			if( !email.equals(Constant.IS_EMPTY) ){
+				
+				//verified
+				Client clientVerified = clientDao.findPaUserByEmailV2( new ClientDTO(email) );
+				System.out.println("email = "+clientVerified.getEmail());
+				
+				if( (clientVerified != null) == true ){
+					
+					ClientDTO client = new ClientDTO();
+					//password generated
+					client.setClientId(clientVerified.getClientId());
+					client.setEmail( clientVerified.getEmail() );
+					
+					System.out.println("si modifico");
+					//send email
+					// SMTP server information
+			        String host = "smtp.gmail.com";
+			        String port = "587";
+			        String mailFrom = "yanbal.email@gmail.com";
+			        String password = "yanbal123456789";
+			 
+			        // outgoing message information
+			        String mailTo = client.getEmail().trim(); 
+			        String subject = "Yanbal Email";
+			 
+			        // message contains HTML markups
+			        String message = "<i>Greetings!</i><br>";
+			        message += "<b>Hello , this is an example to send email</b><br>";
+			        message += "<font color=orange>Yanbal Mail Service</font>";
+			 
+			        HtmlEmailSender mailer = new HtmlEmailSender();
+			 
+			        try {
+			            mailer.sendHtmlEmail(host, port, mailFrom, password, mailTo, subject, message);
+			            return new ClientDTO( new Message(true, Constant.SATISFACTORY_PROCESS) );
+			        } catch (Exception ex) {
+			            ex.printStackTrace();
+			            return new ClientDTO( new Message(false, Constant.ERROR_SENDING_EMAIL) );
+			        }
+				}
+				else{
+					return new ClientDTO( new Message(false, Constant.EMAIL_NOT_FOUND) );
+					}
+			
+			}else{
+				return new ClientDTO( new Message(false, Constant.PARAMETER_IS_NOT_SPECIFIED) );
+			}
+		}catch(Exception e){
+			return new ClientDTO( new Message(false, Constant.DATABASE_ERROR) );
+		}	
+	}
 
 }

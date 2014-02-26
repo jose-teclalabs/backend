@@ -18,14 +18,14 @@ import pe.com.yambal.model.ClientDTO;
 import pe.com.yambal.pojo.Client;
 
 @Repository
-public class ClientDaoImpl extends GenericDaoImpl<ClientDTO> implements ClientDao {
+public class ClientDaoImpl extends GenericDaoImpl<ClientDTO> implements
+		ClientDao {
 
 	private static final Log log = LogFactory.getLog(ClientDaoImpl.class);
 
 	@PersistenceContext
-    private EntityManager entityManager;
-	
-	
+	private EntityManager entityManager;
+
 	@Transactional
 	@Override
 	public Integer saveClient(ClientDTO c) {
@@ -45,26 +45,28 @@ public class ClientDaoImpl extends GenericDaoImpl<ClientDTO> implements ClientDa
 	@Override
 	public Client searchByDni(ClientDTO client) throws Exception {
 		String sql = "SELECT clie_id as clientId FROM client WHERE clie_dni = :dni and clie_status = 1 ";
-//		Client clieReturn = null;
-		try {			
-			System.out.println("Vengo con la siguiente informaciuon  +  " + client.toString());
+		// Client clieReturn = null;
+		try {
+			System.out.println("Vengo con la siguiente informaciuon  +  "
+					+ client.toString());
 			Query squery = entityManager.createNativeQuery(sql.toString());
 			HibernateQuery hibernateQuery = (HibernateQuery) squery;
 			SQLQuery query = (SQLQuery) hibernateQuery.getHibernateQuery();
-			query.setInteger("dni",client.getDni());
+			query.setInteger("dni", client.getDni());
 			query.addScalar("clientId", StandardBasicTypes.INTEGER);
-			query.setResultTransformer(Transformers.aliasToBean(Client.class));	
-			return 	 ((Client) squery.getSingleResult());
-//			System.out.println("ERRRORRRR en el DAAAAOO  :" + clieReturn.toString());
-			
+			query.setResultTransformer(Transformers.aliasToBean(Client.class));
+			return ((Client) squery.getSingleResult());
+			// System.out.println("ERRRORRRR en el DAAAAOO  :" +
+			// clieReturn.toString());
+
 		}
-//		catch (NullPointerException npe){
-//			System.out.println("Error " + npe);
-//			return null;			
-//		}
-//		catch (NonUniqueResultException non){
-//			return null;			
-//		}
+		// catch (NullPointerException npe){
+		// System.out.println("Error " + npe);
+		// return null;
+		// }
+		// catch (NonUniqueResultException non){
+		// return null;
+		// }
 		catch (NoResultException e) {
 			return null;
 		} catch (RuntimeException re) {
@@ -72,4 +74,25 @@ public class ClientDaoImpl extends GenericDaoImpl<ClientDTO> implements ClientDa
 			throw re;
 		}
 	}
+
+	public Client findPaUserByEmailV2(ClientDTO paUser) throws Exception {
+
+		String sql = "SELECT clie_id as clientId , clie_email as email FROM client where clie_email = :email";
+		try {
+			Query squery = entityManager.createNativeQuery(sql);
+			HibernateQuery hibernateQuery = (HibernateQuery) squery;
+			SQLQuery query = (SQLQuery) hibernateQuery.getHibernateQuery();
+			query.setString("email", paUser.getEmail());
+			query.addScalar("clientId", StandardBasicTypes.INTEGER);
+			query.addScalar("email", StandardBasicTypes.STRING);
+			query.setResultTransformer(Transformers.aliasToBean(Client.class));
+			return (Client) squery.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} catch (RuntimeException re) {
+			log.error("select email failed", re);
+			throw re;
+		}
+	}
+
 }

@@ -51,6 +51,10 @@ public class ClientDTO {
 
 	}
 
+	public ClientDTO(String email) {
+		this.email = email;
+	}
+	
 	public ClientDTO(Integer id) {
 		this.clientId = id;
 	}
