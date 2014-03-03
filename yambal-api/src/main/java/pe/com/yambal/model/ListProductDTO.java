@@ -1,11 +1,7 @@
 package pe.com.yambal.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import pe.com.yambal.util.Constant;
 
 @Entity
@@ -42,9 +36,6 @@ public class ListProductDTO {
 	@ManyToOne(targetEntity = CombinationDTO.class)
 	@JoinColumn(name = "comb_id")
 	private CombinationDTO combination;
-
-	@OneToMany(targetEntity = SeleccionDTO.class, mappedBy = "listProducto", cascade = { CascadeType.ALL }, orphanRemoval = true)
-	private List<SeleccionDTO> seleccionList = new ArrayList<SeleccionDTO>(0);
 
 	public Integer getLipoId() {
 		return lipoId;
@@ -85,13 +76,4 @@ public class ListProductDTO {
 	public void setCombination(CombinationDTO combination) {
 		this.combination = combination;
 	}
-
-	public List<SeleccionDTO> getSeleccionList() {
-		return seleccionList;
-	}
-
-	public void setSeleccionList(List<SeleccionDTO> seleccionList) {
-		this.seleccionList = seleccionList;
-	}
-
 }

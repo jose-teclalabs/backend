@@ -1,6 +1,7 @@
 package pe.com.yambal.model;
 
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import pe.com.yambal.util.Constant;
+import pe.com.yambal.util.Message;
 
 @Entity
 @Table(name = "seleccion", catalog = Constant.NAME_CATALOG, schema = Constant.NAME_SCHEMA)
@@ -30,13 +33,36 @@ public class SeleccionDTO {
 	private RegisterDTO register;
 
 	@ManyToOne(targetEntity = ListProductDTO.class)
-	@JoinColumn(name = "lipo_id")
-	private ListProductDTO listProducto;
-
+	@JoinColumn(name = "prod_id")
+	private ProductDTO producto;
+	
 	@Column(name = "sele_status")
 	private Integer status;
 	@Column(name = "sele_date")
 	private Date seleDate;
+	
+	
+	@Transient
+	Message message;
+
+	public SeleccionDTO() {
+
+	}
+
+	
+	public SeleccionDTO(Integer id) {
+		this.seleId = id;
+	}
+
+	public SeleccionDTO(Message message) {
+		this.message = message;
+	}
+
+	public SeleccionDTO(Integer id, Message message) {
+		this.seleId = id;
+		this.message = message;
+	}
+	
 
 	public Integer getSeleId() {
 		return seleId;
@@ -53,13 +79,13 @@ public class SeleccionDTO {
 	public void setRegister(RegisterDTO register) {
 		this.register = register;
 	}
-
-	public ListProductDTO getListProducto() {
-		return listProducto;
+	
+	public ProductDTO getProducto() {
+		return producto;
 	}
 
-	public void setListProducto(ListProductDTO listProducto) {
-		this.listProducto = listProducto;
+	public void setProducto(ProductDTO producto) {
+		this.producto = producto;
 	}
 
 	public Integer getStatus() {
@@ -78,4 +104,15 @@ public class SeleccionDTO {
 		this.seleDate = seleDate;
 	}
 
+
+	public Message getMessage() {
+		return message;
+	}
+
+
+	public void setMessage(Message message) {
+		this.message = message;
+	}
+	
+	 
 }

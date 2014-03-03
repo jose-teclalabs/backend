@@ -74,4 +74,13 @@ public class ClientRequest {
 		this.age = age;
 	}
 
+	@Override
+	public String toString() {
+		return "ClientRequest [name=" + name + ", address=" + address
+				+ ", age=" + age + ", dni=" + dni + ", email=" + email
+				+ ", code=" + code + "]";
+	}
+	
+	
+
 }

@@ -36,6 +36,14 @@ public class ProductDTO {
 	private Date prodDate;
 	@OneToMany(targetEntity = ListProductDTO.class, mappedBy = "product", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<ListProductDTO> listProductList = new ArrayList<ListProductDTO>(0);
+	
+	@OneToMany(targetEntity = SeleccionDTO.class, mappedBy = "producto", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	private List<SeleccionDTO> seleccionList = new ArrayList<SeleccionDTO>(0);
+
+	
+	public ProductDTO(Integer prodId) {
+		this.prodId = prodId;
+	}
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -60,8 +68,16 @@ public class ProductDTO {
 	public void setListProductList(List<ListProductDTO> listProductList) {
 		this.listProductList = listProductList;
 	}
-	
-	
-	
-
+	public Integer getProdId() {
+		return prodId;
+	}
+	public void setProdId(Integer prodId) {
+		this.prodId = prodId;
+	}
+	public List<SeleccionDTO> getSeleccionList() {
+		return seleccionList;
+	}
+	public void setSeleccionList(List<SeleccionDTO> seleccionList) {
+		this.seleccionList = seleccionList;
+	}
 }

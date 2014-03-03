@@ -1,10 +1,7 @@
 package pe.com.yambal.util;
 
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
-
-import pe.com.yambal.pojo.Client;
 
 public class Message {
 
