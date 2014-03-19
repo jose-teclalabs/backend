@@ -20,7 +20,6 @@ import pe.com.yambal.ws.request.ClientRequest;
 @Service
 public class ClientServiceImpl implements ClientService{
 
-	
 	private static final Log log = LogFactory.getLog(ClientServiceImpl.class);
 	
 	@Autowired
@@ -31,29 +30,27 @@ public class ClientServiceImpl implements ClientService{
 	@Override
 	public ClientDTO saveClient(ClientRequest request) {
 		try{			
-			Integer age = null;
-			Integer dni = null;
+			String phone = null;
+			String email =  null;
+			String name = null;
 			String codeprincipal = request.getCode();
 			try {
-				System.out.println("ERRRORRR ++   " +  request.toString());
-				age = Integer.parseInt(request.getAge());
-				dni = Integer.parseInt(request.getDni());
-	
+				phone = request.getPhone();
+				email = request.getEmail();
+				name = request.getName();
 			} catch (Exception e) {
 				return new ClientDTO(new Message(false,
 						Constant.PARAMETER_IS_NOT_PROPERLY_FORMATTED));
 			}
-		System.out.println("el codigo del asesor es " + codeprincipal);
-		if (!request.getCode().equals(Constant.IS_EMPTY)){
-			System.out.println("el codigo del asesor es " + codeprincipal);
+		if (!request.getCode().equals(Constant.IS_EMPTY) && (!email.equals(Constant.IS_EMPTY))){
 			Adviser adviserReturn = adviserDao.verifyCodeOfAdviser(new AdviserDTO(codeprincipal));
-//			System.out.println("estoy en el servicio"  + adviserReturn.getAdviserId());
 			if (adviserReturn == null) {
 				return new ClientDTO(new Message(false,Constant.ADVISER_NOT_FOUND));
 			}
 			ClientDTO objAlmacenador = new ClientDTO();
-			objAlmacenador.setDni(dni);
-			Client clientDniVerify = clientDao.searchByDni(objAlmacenador);
+			objAlmacenador.setEmail(email);
+			objAlmacenador.setPhone(phone);
+			Client clientDniVerify = clientDao.searchByEmailOrPhone(objAlmacenador);
 			
 			if(clientDniVerify != null){
 				Integer oldID = clientDniVerify.getClientId();
@@ -61,29 +58,20 @@ public class ClientServiceImpl implements ClientService{
 			}
 			
 			ClientDTO clientObj =  new ClientDTO();
-			clientObj.setAddress(request.getAddress());
-			clientObj.setEmail(request.getEmail());
-			clientObj.setName(request.getName());
+			clientObj.setEmail(email);
+			clientObj.setName(name);
+			clientObj.setPhone(phone);
 			clientObj.setClientDate(new Date());
-			clientObj.setDni(dni);
 			clientObj.setStatus(1);
-			clientObj.setAge(age);
 			clientObj.setAdviser(new AdviserDTO(adviserReturn.getAdviserId()));
 			Integer newID = clientDao.saveClient(clientObj);		
-			System.out.println("EERRRRORRRRR EN SERVICE   " + clientObj.toString());
-			
 			return new ClientDTO(newID, new Message(true ,Constant.SUCCESS));
 			} else {
 			return new ClientDTO(new Message(false, Constant.MISSING_VALUES_PARAMETERS));
 		}			
 		}
-//		catch(NullPointerException ep){
-//			System.out.println("Errorrr" + ep );
-//			return null;
-//		}
 		catch (Exception e) {
-			System.out.println("Error " +e);
-			log.error("Error at save profile goal" );
+			log.error("Error at client" );
 			return new ClientDTO(new Message(false,Constant.DATABASE_ERROR));
 		}
 	}

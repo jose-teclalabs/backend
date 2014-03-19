@@ -1,10 +1,12 @@
 package pe.com.yambal.service.impl;
 
 import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import pe.com.yambal.dao.ClientDao;
 import pe.com.yambal.dao.CombinationDao;
 import pe.com.yambal.dao.RegisterDao;
@@ -27,8 +29,6 @@ public class RegisterServiceImpl implements RegisterService {
 	RegisterDao registerDao;
 	
 	private static final Log log = LogFactory.getLog(RegisterServiceImpl.class);
-	
-	
 	
 	@Override
 	public RegisterDTO addCombination(RegisterRequest request) {
@@ -66,8 +66,8 @@ public class RegisterServiceImpl implements RegisterService {
 			register.setCombination(combinationReturn);
 			register.setStatus(1);
 			register.setRegiDate(new Date());
-			registerDao.persist(register);
-			return new RegisterDTO(new Message(true ,Constant.SUCCESS));
+			Integer newID = registerDao.saveRegister(register);
+			return new RegisterDTO(newID, new Message(true ,Constant.SUCCESS));
 			
 			}else{
 				return new RegisterDTO(new Message(false, Constant.MISSING_VALUES_PARAMETERS));

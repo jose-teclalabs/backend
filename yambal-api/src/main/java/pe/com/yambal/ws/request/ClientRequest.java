@@ -11,12 +11,8 @@ public class ClientRequest {
 
 	@XmlElement(name = "name")
 	private String name;
-	@XmlElement(name = "address")
-	private String address;
-	@XmlElement(name = "age")
-	private String age;
-	@XmlElement(name = "dni")
-	private String dni;
+	@XmlElement(name = "phone")
+	private String phone;
 	@XmlElement(name = "email")
 	private String email;
 	@XmlElement(name = "code")
@@ -32,14 +28,6 @@ public class ClientRequest {
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
 	}
 
 	public String getEmail() {
@@ -58,29 +46,11 @@ public class ClientRequest {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getAge() {
-		return age;
-	}
-
-	public void setAge(String age) {
-		this.age = age;
-	}
-
-	@Override
-	public String toString() {
-		return "ClientRequest [name=" + name + ", address=" + address
-				+ ", age=" + age + ", dni=" + dni + ", email=" + email
-				+ ", code=" + code + "]";
-	}
-	
-	
-
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}	
 }

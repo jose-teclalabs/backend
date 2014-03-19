@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SQLQuery;
@@ -13,7 +12,6 @@ import org.hibernate.transform.Transformers;
 import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import pe.com.yambal.base.GenericDaoImpl;
 import pe.com.yambal.dao.AdviserDao;
 import pe.com.yambal.model.AdviserDTO;
@@ -72,6 +70,44 @@ public class AdviserDaoImpl extends GenericDaoImpl<AdviserDTO> implements Advise
 			throw re;
 		}
 		return adviserReturn;
+	}
+
+	@Transactional
+	@Override
+	public Adviser getUserYambalv2(AdviserDTO adviser) {
+		
+		String sql = "select advi_code as code  from adviser where advi_code = :codeId and advi_status = 1 LIMIT 1";
+		Adviser adviserReturn = null;
+		try {
+			Query squery = entityManager.createNativeQuery(sql.toString());
+			HibernateQuery hibernateQuery = (HibernateQuery) squery;
+			SQLQuery query = (SQLQuery) hibernateQuery.getHibernateQuery();
+			query.setString("codeId", adviser.getCode());
+			query.addScalar("code", StandardBasicTypes.STRING);
+			query.setResultTransformer(Transformers.aliasToBean(Adviser.class));
+			adviserReturn = ((Adviser) squery.getSingleResult());
+		} catch (NoResultException e) {
+			return null;
+		} catch (RuntimeException re) {
+			log.error("verify code adviser failed", re);
+			throw re;
+		}
+		return adviserReturn;
+	}
+	
+	@Transactional
+	@Override
+	public Integer saveAdviser(AdviserDTO c) {
+		Integer idAssinged = null;
+		try {
+			entityManager.persist(c);
+			entityManager.flush();
+			idAssinged = c.getAdviserId();
+		} catch (RuntimeException re) {
+			log.error("persist failed", re);
+			throw re;
+		}
+		return idAssinged;
 	}
 
 }

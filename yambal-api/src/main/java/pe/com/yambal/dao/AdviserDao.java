@@ -8,5 +8,7 @@ public interface AdviserDao extends GenericDao<AdviserDTO> {
 	
 	public AdviserDTO getUserYambal(AdviserDTO adviser);
 	public Adviser verifyCodeOfAdviser(AdviserDTO adviser);
+	public Adviser getUserYambalv2(AdviserDTO adviser);
+	public Integer saveAdviser(AdviserDTO c);
 
 }

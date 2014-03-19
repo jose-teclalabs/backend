@@ -9,6 +9,10 @@ public class Constant {
 	public static final String CLIENT_NOT_FOUND = "client not found";
 	public static final String COMBINATION_NOT_FOUND = "combination not found";
 	public static final String REGISTER_NOT_FOUND = "register not found";
+	public static final String PRODUCT_NOT_FOUND = "product not found";
+	public static final String ADVISER_CREATE = "adviser create";
+	public static final String ADVISER_EXIST = "adviser exist";
+	public static final String NOT_PARAMETERS = "not exist any parameter";
 
 	public static final String SERVICE_ERROR = "service_error";
 	public static final String DATABASE_ERROR = "database_error";

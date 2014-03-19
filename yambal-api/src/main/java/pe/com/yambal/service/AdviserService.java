@@ -5,5 +5,7 @@ import pe.com.yambal.ws.request.AdviserRequest;
 
 public interface AdviserService {
 	public AdviserDTO yambalLogin (AdviserRequest request);
+	public AdviserDTO yambalLoginV2 (AdviserRequest request);
+	
 
 }

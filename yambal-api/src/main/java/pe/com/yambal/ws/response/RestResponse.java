@@ -16,9 +16,12 @@ public class RestResponse {
 	
 	@XmlElement(name="data")
     private List<?> data;
-	
+
 	@XmlElement(name="message")
     private String message;
+	
+	@XmlElement(name="contenido")
+    private String contenido;
     
     public RestResponse() {
         this(true, Collections.EMPTY_LIST);
@@ -41,6 +44,12 @@ public class RestResponse {
     public RestResponse(boolean success, List<?> data,String message) {
         this.success = success;
         this.data = data;
+        this.message = message;
+    }
+    
+    public RestResponse(boolean success, String contenido ,String message) {
+        this.success = success;
+        this.contenido = contenido;
         this.message = message;
     }
 
@@ -71,5 +80,14 @@ public class RestResponse {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public String getContenido() {
+		return contenido;
+	}
+
+	public void setContenido(String contenido) {
+		this.contenido = contenido;
+	}
+
 
 }

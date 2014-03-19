@@ -44,5 +44,13 @@ public class Adviser {
 
 	public void setCode(String code) {
 		this.code = code;
-	} 
+	}
+
+	@Override
+	public String toString() {
+		return "Adviser [adviserId=" + adviserId + ", code=" + code + ", name="
+				+ name + "]";
+	}
+	
+	
 }

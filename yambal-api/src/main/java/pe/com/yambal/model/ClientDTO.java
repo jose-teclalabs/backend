@@ -29,14 +29,10 @@ public class ClientDTO {
 	private Integer clientId;
 	@Column(name = "clie_name")
 	private String name;
-	@Column(name = "clie_address")
-	private String address;
-	@Column(name = "clie_age")
-	private Integer age;
-	@Column(name = "clie_dni",unique=true)
-	private Integer dni;
 	@Column(name = " clie_email")
 	private String email;
+	@Column(name = " clie_phone")
+	private String phone;
 	@Column(name = "clie_status")
 	private Integer status;
 	@Column(name = "clie_date")
@@ -67,8 +63,6 @@ public class ClientDTO {
 		this.clientId = id;
 		this.message = message;
 	}
-	
-
 
 	public Integer getClientId() {
 		return clientId;
@@ -82,32 +76,16 @@ public class ClientDTO {
 		this.name = name;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
-	}
-
-	public Integer getDni() {
-		return dni;
-	}
-
-	public void setDni(Integer dni) {
-		this.dni = dni;
 	}
 
 	public String getEmail() {
@@ -116,14 +94,6 @@ public class ClientDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
 	}
 
 	public Date getClientDate() {
@@ -150,15 +120,19 @@ public class ClientDTO {
 		this.message = message;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
 		return "ClientDTO [clientId=" + clientId + ", name=" + name
-				+ ", address=" + address + ", age=" + age + ", dni=" + dni
-				+ ", email=" + email + ", status=" + status + ", clientDate="
+				+ ", email=" + email + ", phone=" + phone + ", clientDate="
 				+ clientDate + ", adviser=" + adviser + ", message=" + message
 				+ "]";
-	}
-
-	
-	
+	}	
 }

@@ -1,7 +1,6 @@
 package pe.com.yambal.ws;
 
 import java.util.Collections;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -13,6 +12,7 @@ import pe.com.yambal.service.RegisterService;
 import pe.com.yambal.util.Constant;
 import pe.com.yambal.ws.request.RegisterRequest;
 import pe.com.yambal.ws.response.RestResponse;
+import pe.com.yambal.ws.response.RestResponseIDRegister;
 
 @Path("/register")
 public class RegisterWS {
@@ -30,7 +30,8 @@ public class RegisterWS {
 		try{
 			RegisterDTO newRegisterReturn = registerService.addCombination(request);
 			if( newRegisterReturn != null){
-					return new RestResponse(newRegisterReturn.getMessage().isSuccess(), newRegisterReturn.getMessage().getDescription() );
+				RestResponseIDRegister returnNewID = new RestResponseIDRegister(newRegisterReturn);
+				return new RestResponse(newRegisterReturn.getMessage().isSuccess(),Collections.singletonList(returnNewID), newRegisterReturn.getMessage().getDescription() );
 			}else{
 				return new RestResponse(false,Constant.SERVICE_ERROR );
 			}	

@@ -30,6 +30,10 @@ public class ProductDTO {
 	private Integer prodId;
 	@Column(name = "prod_description")
 	private String descripcion;
+	@Column(name = "prod_details")
+	private String details;
+	@Column(name = "prod_type")
+	private String type;
 	@Column(name = "prod_status")
 	private Integer  status;
 	@Column(name = "prod_date")
@@ -39,8 +43,10 @@ public class ProductDTO {
 	
 	@OneToMany(targetEntity = SeleccionDTO.class, mappedBy = "producto", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<SeleccionDTO> seleccionList = new ArrayList<SeleccionDTO>(0);
-
 	
+	public ProductDTO() {
+		
+	}
 	public ProductDTO(Integer prodId) {
 		this.prodId = prodId;
 	}
@@ -80,4 +86,24 @@ public class ProductDTO {
 	public void setSeleccionList(List<SeleccionDTO> seleccionList) {
 		this.seleccionList = seleccionList;
 	}
+	
+	public String getDetails() {
+		return details;
+	}
+	public void setDetails(String details) {
+		this.details = details;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	@Override
+	public String toString() {
+		return "ProductDTO [prodId=" + prodId + ", descripcion=" + descripcion
+				+ ", details=" + details + ", type=" + type + ", status="
+				+ status + ", prodDate=" + prodDate + ", listProductList="
+				+ listProductList + ", seleccionList=" + seleccionList + "]";
+	}	    
 }

@@ -7,6 +7,7 @@ import pe.com.yambal.pojo.Client;
 public interface ClientDao extends GenericDao<ClientDTO> {
 
 	public Integer saveClient(ClientDTO c);
-	public Client searchByDni(ClientDTO client) throws Exception;
-	 public Client findPaUserByEmailV2(ClientDTO paUser) throws Exception;
+//	public Client searchByDni(ClientDTO client) throws Exception;
+	public Client searchByEmailOrPhone(ClientDTO client) throws Exception; 
+	public Client findPaUserByEmailV2(ClientDTO paUser) throws Exception ;
 }

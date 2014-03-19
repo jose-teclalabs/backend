@@ -41,39 +41,32 @@ public class ClientDaoImpl extends GenericDaoImpl<ClientDTO> implements
 		return idAssinged;
 	}
 
-	@Transactional
-	@Override
-	public Client searchByDni(ClientDTO client) throws Exception {
-		String sql = "SELECT clie_id as clientId FROM client WHERE clie_dni = :dni and clie_status = 1 ";
-		// Client clieReturn = null;
-		try {
-			System.out.println("Vengo con la siguiente informaciuon  +  "
-					+ client.toString());
-			Query squery = entityManager.createNativeQuery(sql.toString());
-			HibernateQuery hibernateQuery = (HibernateQuery) squery;
-			SQLQuery query = (SQLQuery) hibernateQuery.getHibernateQuery();
-			query.setInteger("dni", client.getDni());
-			query.addScalar("clientId", StandardBasicTypes.INTEGER);
-			query.setResultTransformer(Transformers.aliasToBean(Client.class));
-			return ((Client) squery.getSingleResult());
-			// System.out.println("ERRRORRRR en el DAAAAOO  :" +
-			// clieReturn.toString());
-
-		}
-		// catch (NullPointerException npe){
-		// System.out.println("Error " + npe);
-		// return null;
-		// }
-		// catch (NonUniqueResultException non){
-		// return null;
-		// }
-		catch (NoResultException e) {
-			return null;
-		} catch (RuntimeException re) {
-			log.error("verify dni client failed", re);
-			throw re;
-		}
-	}
+//	@Transactional
+//	@Override
+//	public Client searchByDni(ClientDTO client) throws Exception {
+//		String sql = "SELECT clie_id as clientId FROM client WHERE clie_dni = :dni and clie_status = 1 ";
+//		// Client clieReturn = null;
+//		try {
+//			System.out.println("Vengo con la siguiente informaciuon  +  "
+//					+ client.toString());
+//			Query squery = entityManager.createNativeQuery(sql.toString());
+//			HibernateQuery hibernateQuery = (HibernateQuery) squery;
+//			SQLQuery query = (SQLQuery) hibernateQuery.getHibernateQuery();
+//			query.setInteger("dni", client.getDni());
+//			query.addScalar("clientId", StandardBasicTypes.INTEGER);
+//			query.setResultTransformer(Transformers.aliasToBean(Client.class));
+//			return ((Client) squery.getSingleResult());
+//			// System.out.println("ERRRORRRR en el DAAAAOO  :" +
+//			// clieReturn.toString());
+//
+//		}
+//		catch (NoResultException e) {
+//			return null;
+//		} catch (RuntimeException re) {
+//			log.error("verify dni client failed", re);
+//			throw re;
+//		}
+//	}
 
 	public Client findPaUserByEmailV2(ClientDTO paUser) throws Exception {
 
@@ -91,6 +84,27 @@ public class ClientDaoImpl extends GenericDaoImpl<ClientDTO> implements
 			return null;
 		} catch (RuntimeException re) {
 			log.error("select email failed", re);
+			throw re;
+		}
+	}
+
+	@Transactional
+	@Override
+	public Client searchByEmailOrPhone(ClientDTO client) throws Exception {
+		String sql = "SELECT clie_id as clientId FROM client WHERE clie_email = :email and clie_status = 1 ";
+		try {
+			Query squery = entityManager.createNativeQuery(sql.toString());
+			HibernateQuery hibernateQuery = (HibernateQuery) squery;
+			SQLQuery query = (SQLQuery) hibernateQuery.getHibernateQuery();
+			query.setString("email", client.getEmail());
+//			query.setInteger("phone", client.getPhone());
+			query.addScalar("clientId", StandardBasicTypes.INTEGER);
+			query.setResultTransformer(Transformers.aliasToBean(Client.class));
+			return ((Client) squery.getSingleResult());
+		} catch (NoResultException e) {
+			return null;
+		} catch (RuntimeException re) {
+			log.error("verify dni client failed", re);
 			throw re;
 		}
 	}
